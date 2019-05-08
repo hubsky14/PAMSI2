@@ -75,10 +75,11 @@ int main()
     }
     wynik=srednia/ilosc;
     cout<<"\nSredni czas wykonywania dla Prima: " <<srednia<<endl;
-
+    
     //kopiowanie grafu do Kruskala
     grafMacierz<int>* Kopia=new grafMacierz<int>;
-
+    wynik=0;
+    srednia=0;
     for(int i=0; i<ilosc; i++)
     {
         Graf[i]->kopiujGraf(Kopia);
@@ -172,7 +173,7 @@ int p=1;
     //Prim lista
  double Czas;
  int V = 10;
- int E=(0.25*V*(V-1))/2;        //dobór parametrów
+ int E=(0.25*V*(V-1))/2;        //dobÃ³r parametrÃ³w
  QueryPerformanceFrequency(&frequency);
     //tworzenie grafu
     struct Graph* graph = createGraph(V);
@@ -192,7 +193,7 @@ addEdge(graph, (( std::rand() % (V-1) )  ), (( std::rand() % (V-1) )  ) , (( std
      Czas = (t2.QuadPart - t1.QuadPart) * 10000.0 / frequency.QuadPart;
 
      cout <<endl<<"Algorytm Prima: "<< Czas << " ms.\n";
-     wynik=Czas+wynik;  //zliczanie ca³kowitego czasu
+     wynik=Czas+wynik;  //zliczanie caÂ³kowitego czasu
 
 }
     cout<<endl<<"Sredni czas dla Prima: "<<wynik/ilosc<<" ms.\n";

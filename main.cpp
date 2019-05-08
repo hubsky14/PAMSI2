@@ -37,7 +37,7 @@ int main()
     cout <<"1-Algorytm Prima i Kruskala macierz"<<endl;
     cout <<"2-Algorytm Kruskala lista"<<endl;
     cout <<"3-Alorytm Prima lista"<<endl;
-    cout <<"4-sprawdzenie implementacji"<<endl<<endl;
+    cout <<"4-sprawdzenie implementacji generacji i zapisu"<<endl<<endl;
     cin >> s;
     cout<<endl;
     switch(s)
@@ -45,10 +45,17 @@ int main()
 
       case 1:
     {
+        int Wi;
+        double Pr;
+        cout << "Wprowadz liczbe wierzcholkow"<< endl;
+        cin >> Wi;
+        cout << endl << "Wprowadz wypelnienie w %" << endl;
+        cin >> Pr;
+        double Wy=Pr/100;
     for(int i=0; i<ilosc; i++)
     {   //generuje graf
         Graf[i]=new grafMacierz<int>;
-        Graf[i]->generujGraf(10, 0.25);
+        Graf[i]->generujGraf(Wi, Wy);
     }
 
     QueryPerformanceFrequency(&frequency);
@@ -71,15 +78,14 @@ int main()
     //sredni czas dla Prima
     for(int i=0; i<ilosc; i++)
     {
-        srednia=srednia+Czasy[i];
+        wynik=wynik+Czasy[i];
     }
-    wynik=srednia/ilosc;
+    srednia=wynik/ilosc;
     cout<<"\nSredni czas wykonywania dla Prima: " <<srednia<<endl;
-    
+
     //kopiowanie grafu do Kruskala
     grafMacierz<int>* Kopia=new grafMacierz<int>;
-    wynik=0;
-    srednia=0;
+
     for(int i=0; i<ilosc; i++)
     {
         Graf[i]->kopiujGraf(Kopia);
@@ -93,6 +99,8 @@ int main()
         Czasy[i]=Czas;
         cout <<endl<<"Algorytm Kruskala: "<< Czas << " ms.\n";
     }
+    wynik=0;
+    srednia=0;
     //Sredni czas dla Kruskala
     for(int i=0; i<ilosc; i++)
     {
@@ -109,15 +117,22 @@ int main()
      break;
 
      case 2:
-    {
 
+    {   //wybor parametrow
+        int Wi;
+        double Pr;
+        cout << "Wprowadz liczbe wierzcholkow"<< endl;
+        cin >> Wi;
+        cout << endl << "Wprowadz wypelnienie w %" << endl;
+        cin >> Pr;
+        double Wy=Pr/100;
     for(int i=0; i<ilosc; i++)
     {
     int V, E;
     //wybor wierzcholkow i gestosci
 	int poczatek, koniec, wartosc;
-    V=700;
-    E=(0,75*V*(V-1))/2;
+    V=Wi;
+    E=(Wy*V*(V-1))/2;
  QueryPerformanceFrequency(&frequency);
 	A k(V);
 	krawedz<int>*e;
@@ -153,14 +168,14 @@ int p=1;
 		Czas = (t2.QuadPart - t1.QuadPart) * 10000.0 / frequency.QuadPart;
 		cout <<endl<<"Algorytm Kruskala: "<< Czas << " ms.\n";
 		wynik=Czas+wynik;
-
+/*
    //pocztek i koniec galezi
 	cout<<"Resulting MST: u  v\n";
 	for(int i=0; i<E; i++){
 		if(e[i].IsAdded)
 		cout<<"("<<e[i].poczatek<<","<<e[i].koniec<<")"<<endl;
 	}
-
+*/
 
     }
      cout<<endl<<"Sredni czas dla Kruksala: "<<wynik/ilosc<<" ms.\n";
@@ -168,12 +183,19 @@ int p=1;
     break;
 
     case 3:
-{
+{       //wybor parametrow
+        int Wi;
+        double Pr;
+        cout << "Wprowadz liczbe wierzcholkow"<< endl;
+        cin >> Wi;
+        cout << endl << "Wprowadz wypelnienie w %" << endl;
+        cin >> Pr;
+        double Wy=Pr/100;
 
     //Prim lista
  double Czas;
- int V = 10;
- int E=(0.25*V*(V-1))/2;        //dobór parametrów
+ int V = Wi;
+ int E=(Wy*V*(V-1))/2;        //dobór parametrów
  QueryPerformanceFrequency(&frequency);
     //tworzenie grafu
     struct Graph* graph = createGraph(V);
